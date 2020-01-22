@@ -1,68 +1,80 @@
 package com.geektech.quizapp_gt_4_2.main;
 
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
-
 import com.geektech.quizapp_gt_4_2.R;
+import com.geektech.quizapp_gt_4_2.history.HistoryFragment;
 import com.geektech.quizapp_gt_4_2.settings.SettingsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     private MainViewModel mViewModel;
-
     private ViewPager mViewPager;
     private MainPagerAdapter mAdapter;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mViewModel = ViewModelProviders.of(this)
-                .get(MainViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
 
         mViewPager = findViewById(R.id.main_view_pager);
         mAdapter = new MainPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mAdapter);
+        mViewPager.setCurrentItem(0);
 
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_view_pager, new MainFragment()).commit();
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-
+        mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.action_explore:
-                        Toast.makeText(MainActivity.this, "Recents", Toast.LENGTH_SHORT).show();
+            public void onPageSelected(int position) {
+                int itemsChanged = R.id.action_explore;
+
+                switch (position) {
+                    case 1:
+                        itemsChanged = R.id.action_map;
                         break;
-                    case R.id.action_map:
-                        Toast.makeText(MainActivity.this, "Favorites", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.action_profile:
-                        Toast.makeText(MainActivity.this, "Nearby", Toast.LENGTH_SHORT).show();
+                    case 2:
+                        itemsChanged = R.id.action_profile;
                         break;
                 }
-                return true;
+                bottomNavigationView.setSelectedItemId(itemsChanged);
             }
         });
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_explore:
+                mViewPager.setCurrentItem(0, true);
+                break;
+            case R.id.action_map:
+                mViewPager.setCurrentItem(1, true);
+                break;
 
-    private class MainPagerAdapter extends FragmentPagerAdapter {
+            case R.id.action_profile:
+                mViewPager.setCurrentItem(2, true);
+                break;
+        }
+        return true;
+    }
 
+    public static class MainPagerAdapter extends FragmentPagerAdapter {
         public MainPagerAdapter(@NonNull FragmentManager fm) {
             super(fm);
         }
@@ -74,19 +86,21 @@ public class MainActivity extends AppCompatActivity {
 
             switch (position) {
                 case 0:
-                    fragment = MainFragment.newInstance();
+                    fragment = new MainFragment();
+                    break;
+                case 1:
+                    fragment = new HistoryFragment();
                     break;
                 default:
-                    fragment = SettingsFragment.newInstance();
+                    fragment = new SettingsFragment();
                     break;
             }
-
             return fragment;
         }
 
         @Override
         public int getCount() {
-            return 2;
+            return 3;
         }
     }
 }

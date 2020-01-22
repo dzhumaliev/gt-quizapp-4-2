@@ -16,7 +16,7 @@ import com.geektech.quizapp_gt_4_2.R;
 
 public class HistoryFragment extends Fragment {
 
-    private HistoryViewModel mViewModel;
+//    private HistoryViewModel mViewModel;
 
     public static HistoryFragment newInstance() {
         return new HistoryFragment();
@@ -31,7 +31,7 @@ public class HistoryFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(HistoryViewModel.class);
+//        mViewModel = ViewModelProviders.of(this).get(HistoryViewModel.class);
         // TODO: Use the ViewModel
     }
 

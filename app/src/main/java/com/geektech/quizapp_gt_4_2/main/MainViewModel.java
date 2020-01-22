@@ -10,9 +10,6 @@ public class MainViewModel extends ViewModel {
     public MutableLiveData<String> message = new MutableLiveData<>();
 
     public MainViewModel() {
-        Log.d("ololo", "View model create");
-
-        message.setValue("Hello Observer");
     }
 
     public void onLoginClick() {
@@ -23,5 +20,7 @@ public class MainViewModel extends ViewModel {
     protected void onCleared() {
         super.onCleared();
     }
+
+
 
 }

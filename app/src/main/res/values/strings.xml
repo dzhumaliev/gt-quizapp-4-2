@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">QuizApp-GT-4-2</string>
+    <string name="minus">-</string>
+    <string name="plus">+</string>
 </resources>
