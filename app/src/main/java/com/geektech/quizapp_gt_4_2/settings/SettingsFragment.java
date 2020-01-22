@@ -1,10 +1,10 @@
 package com.geektech.quizapp_gt_4_2.settings;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,7 +17,9 @@ import com.geektech.quizapp_gt_4_2.main.MainViewModel;
 
 public class SettingsFragment extends Fragment {
 
-//    private MainViewModel mViewModel;
+    private SettingsViewModel mViewModel;
+    private MainViewModel mViewModel1;
+    private TextView tvResult;
 
     public static SettingsFragment newInstance() {
         return new SettingsFragment();
@@ -26,7 +28,11 @@ public class SettingsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.settings_fragment, container, false);
+        View view = inflater.inflate(R.layout.settings_fragment, container, false);
+        tvResult = view.findViewById(R.id.tv_result);
+
+        return view;
+
     }
 
     @Override
@@ -38,17 +44,21 @@ public class SettingsFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-//        mViewModel = ViewModelProviders.of(this)
-//                .get(MainViewModel.class);
-//
-//        mViewModel.message.observe(this, new Observer<String>() {
-//            @Override
-//            public void onChanged(String s) {
-//                Log.d("ololo", s);
-//            }
-//        });
-//
-//        mViewModel.onLoginClick();
-    }
+        mViewModel = ViewModelProviders.of(getActivity()).get(SettingsViewModel.class);
+        mViewModel1 = ViewModelProviders.of(this).get(MainViewModel.class);
 
+        mViewModel.button1.observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                tvResult.setText(integer.toString());
+            }
+        });
+        mViewModel.button1.observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                tvResult.setText(integer.toString());
+
+            }
+        });
+    }
 }

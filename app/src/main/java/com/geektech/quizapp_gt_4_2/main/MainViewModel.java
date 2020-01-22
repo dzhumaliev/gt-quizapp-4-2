@@ -8,12 +8,10 @@ import androidx.lifecycle.ViewModel;
 public class MainViewModel extends ViewModel {
 
     public MutableLiveData<String> message = new MutableLiveData<>();
+    public MutableLiveData<Integer> button = new MutableLiveData<>();
+
 
     public MainViewModel() {
-    }
-
-    public void onLoginClick() {
-
     }
 
     @Override
