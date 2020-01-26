@@ -29,7 +29,6 @@ public class SettingsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.settings_fragment, container, false);
-        tvResult = view.findViewById(R.id.tv_result);
 
         return view;
 
@@ -47,18 +46,5 @@ public class SettingsFragment extends Fragment {
         mViewModel = ViewModelProviders.of(getActivity()).get(SettingsViewModel.class);
         mViewModel1 = ViewModelProviders.of(this).get(MainViewModel.class);
 
-        mViewModel.button1.observe(this, new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer integer) {
-                tvResult.setText(integer.toString());
-            }
-        });
-        mViewModel.button1.observe(this, new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer integer) {
-                tvResult.setText(integer.toString());
-
-            }
-        });
     }
 }

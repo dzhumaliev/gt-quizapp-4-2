@@ -30,9 +30,7 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
-        btnPlus = view.findViewById(R.id.btn_plus);
-        btnMinus = view.findViewById(R.id.btn_minus);
+        View view = inflater.inflate(R.layout.main_fragment, container, false);
         return view;
     }
 
@@ -46,22 +44,13 @@ public class MainFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
+        mViewModel = ViewModelProviders.of(getActivity())
+                .get(MainViewModel.class);
         mSettingsViewModel = ViewModelProviders.of(getActivity())
                 .get(SettingsViewModel.class);
 
-        btnPlus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mSettingsViewModel.plus();
-            }
-        });
-        btnMinus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mSettingsViewModel.minus();
-            }
-        });
-        mViewModel.message.observe(this, new Observer<String>() {
+
+        mViewModel.message.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
             }

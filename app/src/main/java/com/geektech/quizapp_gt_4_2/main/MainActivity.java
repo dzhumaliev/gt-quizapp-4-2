@@ -24,7 +24,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private BottomNavigationView bottomNavigationView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void
+    onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
+                bottomNavigationView.getMenu().getItem(position).setChecked(true);  // this right, but this work too/
                 int itemsChanged = R.id.action_explore;
 
                 switch (position) {

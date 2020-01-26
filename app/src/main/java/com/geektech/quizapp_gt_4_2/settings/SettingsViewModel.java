@@ -4,16 +4,15 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class SettingsViewModel extends ViewModel {
-    MutableLiveData<Integer> button1 = new MutableLiveData<>();
-    MutableLiveData<Integer> button2 = new MutableLiveData<>();
-    private int count1 = 0;
+    MutableLiveData<Integer> button = new MutableLiveData<>();
+    private int count = 0;
 
     public void plus() {
-        button1.postValue(count1++);
+        button.postValue(count++);
     }
 
     public void minus() {
-        button1.postValue(count1--);
+        button.postValue(count--);
     }
 }
 

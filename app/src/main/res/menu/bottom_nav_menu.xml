@@ -5,18 +5,19 @@
         android:id="@+id/action_explore"
         android:enabled="true"
         android:icon="@drawable/explore"
-        android:title="Main"
+        android:title=""
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_map"
         android:enabled="true"
         android:icon="@drawable/map"
-        android:title="History"
+        android:title=""
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_profile"
         android:enabled="true"
         android:icon="@drawable/profile"
-        android:title="Settings"
-        app:showAsAction="ifRoom" />
+        android:title=""
+        app:showAsAction="ifRoom"
+       />
 </menu>
